@@ -1,0 +1,4076 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دوره جامع برنامه‌نویسی 168 ساعته - از صفر تا حرفه‌ای">
+    <meta name="keywords" content="برنامه نویسی, آموزش کدنویسی, پایتون, جاوااسکریپت, آموزش آنلاین">
+    <meta name="author" content="دپارتمان آموزش برنامه‌نویسی">
+    <title>دوره جامع برنامه‌نویسی 168 ساعته - از صفر تا حرفه‌ای</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap">
+    <style>
+        /* استایل‌های کلی و متغیرها */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --accent: #4cc9f0;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --bg-gradient: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            --card-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            position: relative;
+            border: 3px solid var(--primary);
+            min-height: 100vh;
+        }
+
+        /* نوار ناوبری */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
+        }
+
+        .contact-btn:hover {
+            background: #d0006f;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.4);
+        }
+
+        /* صفحات */
+        .page {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+            min-height: calc(100vh - 100px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* صفحه اصلی */
+        .home-header {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(76, 201, 240, 0.1));
+            text-align: center;
+            padding: 60px 30px 80px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 40%);
+            z-index: 1;
+        }
+
+        .home-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .home-header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .home-header p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--dark);
+        }
+
+        .value-banner {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd);
+            color: #1d3557;
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 15px;
+            max-width: 500px;
+            font-weight: bold;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .value-banner:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .value-banner span {
+            color: #d62828;
+            font-size: 1.6rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px 30px;
+            min-width: 200px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 2px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            background: linear-gradient(45deg, black, transparent);
+            transform: skew(10deg, 10deg);
+        }
+
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: block;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .page-card {
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.95), rgba(230, 230, 250, 0.95));
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(67, 97, 238, 0.2);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .page-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            border-color: var(--secondary);
+        }
+
+        .page-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.15), rgba(247, 37, 133, 0.1));
+            transition: height 0.6s ease;
+            z-index: -1;
+        }
+
+        .page-card:hover::before {
+            height: 100%;
+        }
+
+        .page-card i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .page-card:hover i {
+            color: var(--secondary);
+            transform: rotate(15deg) scale(1.2);
+        }
+
+        .page-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .page-card p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* صفحات ماژول‌ها */
+        .module-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 60px 40px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 40%);
+            z-index: 1;
+        }
+
+        .module-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .module-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .module-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-body {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            color: var(--primary-dark);
+            margin: 50px 0 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .content-body p {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            text-align: justify;
+        }
+
+        .content-body ul,
+        .content-body ol {
+            padding-right: 30px;
+            margin: 30px 0;
+        }
+
+        .content-body li {
+            margin-bottom: 20px;
+            position: relative;
+            font-size: 1.2rem;
+            padding-right: 35px;
+        }
+
+        .content-body li::before {
+            content: "▹";
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .code-sample {
+            background: linear-gradient(135deg, #2b2d42, #1d2b3a);
+            color: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            overflow-x: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .code-title {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: #f8f9fa;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        pre {
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+
+        .code-comment {
+            color: #8d99ae;
+        }
+
+        .code-keyword {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .code-function {
+            color: #4cc9f0;
+        }
+
+        .code-string {
+            color: #8ac926;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(39, 174, 96, 0.1));
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            border-left: 4px solid #2ecc71;
+            position: relative;
+        }
+
+        .tip-box::before {
+            content: "نکته حرفه‌ای";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .exercise-box {
+            background: linear-gradient(135deg, rgba(232, 244, 248, 0.9), rgba(210, 230, 245, 0.9));
+            border-radius: 20px;
+            padding: 30px;
+            margin: 50px 0;
+            box-shadow: var(--card-shadow);
+            border: 2px solid rgba(76, 201, 240, 0.3);
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .exercise-title {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .exercise-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .run-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .run-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), #2a0a8a);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(67, 97, 238, 0.4);
+        }
+
+        .solution-btn {
+            background: linear-gradient(135deg, var(--secondary), #b5179e);
+            color: white;
+        }
+
+        .solution-btn:hover {
+            background: linear-gradient(135deg, #b5179e, #8a1276);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(247, 37, 133, 0.4);
+        }
+
+        .exercise-result {
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 40px 0 20px;
+            font-weight: bold;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), #2a0a8a);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(67, 97, 238, 0.4);
+        }
+
+        /* صفحات آزمون‌ها */
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .quiz-header h1 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        .quiz-header p {
+            font-size: 1.3rem;
+            color: #555;
+        }
+
+        .quiz-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .quiz-question {
+            background: rgba(248, 249, 250, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(67, 97, 238, 0.1);
+            transition: var(--transition);
+        }
+
+        .quiz-question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .option {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .option input {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            display: block;
+            margin: 50px auto 0;
+            box-shadow: 0 15px 35px rgba(67, 97, 238, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(67, 97, 238, 0.4);
+        }
+
+        .quiz-result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-score {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .result-message {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(76, 201, 240, 0.4);
+        }
+
+        /* فوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 30px 40px;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(76, 201, 240, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(247, 37, 133, 0.1) 0%, transparent 40%);
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            margin-top: 40px;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 1200px) {
+            .page-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .home-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .module-header h1 {
+                font-size: 2.3rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .home-header {
+                padding: 40px 20px;
+            }
+
+            .home-header h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                gap: 20px;
+            }
+
+            .stat-card {
+                min-width: calc(50% - 20px);
+                padding: 20px;
+            }
+
+            .module-header {
+                padding: 40px 20px;
+            }
+
+            .content-body {
+                padding: 0 15px;
+            }
+
+            .quiz-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stat-card {
+                min-width: 100%;
+            }
+
+            .value-banner {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .page {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .content-body li {
+                font-size: 1.1rem;
+            }
+
+            .footer-links a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* اسکرول بار زیبا */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(245, 245, 245, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--primary-dark));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--primary-dark), #2a0a8a);
+        }
+
+        /* استایل‌های جدید برای صفحات ماژول‌ها و تمرین‌ها */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 2px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        .module-card h3 {
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .module-card .meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px dashed #ddd;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .module-card .description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .module-card .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: rgba(67, 97, 238, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .exercise-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .exercise-item h4 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-item .difficulty {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .difficulty-easy {
+            background: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+        }
+
+        .difficulty-medium {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+
+        .difficulty-hard {
+            background: rgba(231, 76, 60, 0.2);
+            color: #c0392b;
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 2px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-card h3 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quiz-card .meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px dashed #ddd;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--success);
+            border-radius: 10px;
+        }
+
+        /* ویژگی‌های امنیتی */
+        .security-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        /* استایل‌های چت روم */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .chat-toggle {
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .chat-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .chat-toggle i {
+            font-size: 24px;
+        }
+
+        .chat-window {
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: none;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .chat-window.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header .status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .chat-close {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message.received {
+            background: #e0e0e0;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.sent {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary);
+        }
+
+        .chat-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-input button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            color: #777;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            display: none;
+        }
+
+        .typing-indicator span {
+            animation: blink 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* رسپانسیو برای چت */
+        @media (max-width: 576px) {
+            .chat-window {
+                width: 300px;
+                right: 10px;
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- نوار ناوبری -->
+        <nav class="navbar">
+            <a href="#" class="logo" data-page="home">
+                <i class="fas fa-laptop-code"></i>
+                <span>دوره برنامه‌نویسی</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#" class="active" data-page="home">خانه</a>
+                <a href="#" data-page="modules">ماژول‌ها</a>
+                <a href="#" data-page="quizzes">آزمون‌ها</a>
+                <a href="#" data-page="exercises">تمرین‌ها</a>
+                <a href="#" data-page="projects">پروژه‌ها</a>
+            </div>
+
+            <a href="tel:09050438782" class="contact-btn">
+                <i class="fas fa-phone"></i>
+                09050438782
+            </a>
+        </nav>
+
+        <!-- صفحه اصلی -->
+        <section id="home" class="page active">
+            <div class="home-header">
+                <div class="home-header-content">
+                    <h1><i class="fas fa-laptop-code"></i> دوره جامع برنامه‌نویسی 168 ساعته</h1>
+                    <p>یادگیری برنامه‌نویسی از صفر برای افراد کاملاً مبتدی تا حرفه‌ای شدن</p>
+
+                    <div class="value-banner">
+                        <i class="fas fa-trophy"></i>
+                        ارزش محتوای این دوره:
+                        <span>۱۰ میلیون تومان <span>اما</span>
+                            <span
+                                style="background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd); border-radius:100px; color: #1d4cabd8; padding: 0 10px;">حالا
+                                رایگان شد</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="number">16</span>
+                    ماژول آموزشی
+                </div>
+                <div class="stat-card">
+                    <span class="number">+168</span>
+                    ساعت آموزش عملی
+                </div>
+                <div class="stat-card">
+                    <span class="number">65</span>
+                    پروژه واقعی
+                </div>
+                <div class="stat-card">
+                    <span class="number">100%</span>
+                    تضمین یادگیری
+                </div>
+                <div class="stat-card">
+                    <span class="number">7 صبح تا10 ظهر</span>
+                    پشتیبانی همیشگی
+                </div>
+            </div>
+
+            <h2
+                style="text-align: center; margin: 50px 0 30px; color: var(--primary-dark); font-size: 2rem; border-bottom: 3px solid var(--secondary); padding-bottom: 15px; display: inline-block; padding-left: 50px; padding-right: 50px;">
+                دسترسی سریع به بخش‌های دوره
+            </h2>
+
+            <div class="page-grid">
+                <div class="page-card" data-page="module1">
+                    <i class="fas fa-brain"></i>
+                    <h3>تفکر برنامه‌نویسی</h3>
+                    <p>یادگیری اصول حل مسئله و طراحی الگوریتم</p>
+                </div>
+
+                <div class="page-card" data-page="module2">
+                    <i class="fas fa-laptop"></i>
+                    <h3>محیط‌های توسعه</h3>
+                    <p>راه‌اندازی محیط حرفه‌ای کدنویسی</p>
+                </div>
+
+                <div class="page-card" data-page="module3">
+                    <i class="fas fa-cogs"></i>
+                    <h3>مفاهیم پایه</h3>
+                    <p>آشنایی با مفاهیم اساسی برنامه‌نویسی</p>
+                </div>
+
+                <div class="page-card" data-page="module4">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>ساختارهای کنترلی</h3>
+                    <p>کنترل جریان برنامه با دستورات شرطی</p>
+                </div>
+
+                <div class="page-card" data-page="quiz1">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>آزمون مفاهیم پایه</h3>
+                    <p>۲۰ سوال تستی برای سنجش درک مفاهیم</p>
+                </div>
+
+                <div class="page-card" data-page="exercise1">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h3>تمرین ماشین حساب</h3>
+                    <p>پیاده‌سازی ماشین حساب با قابلیت‌های پیشرفته</p>
+                </div>
+
+                <div class="page-card" data-page="module5">
+                    <i class="fas fa-repeat"></i>
+                    <h3>حلقه‌ها و تکرار</h3>
+                    <p>کار با حلقه‌های for و while</p>
+                </div>
+
+                <div class="page-card" data-page="module6">
+                    <i class="fas fa-box"></i>
+                    <h3>ساختمان داده‌ها</h3>
+                    <p>آشنایی با لیست‌ها، آرایه‌ها و دیکشنری‌ها</p>
+                </div>
+
+                <div class="page-card" data-page="module7">
+                    <i class="fas fa-cube"></i>
+                    <h3>توابع و ماژول‌ها</h3>
+                    <p>ایجاد توابع و ماژول‌های قابل استفاده مجدد</p>
+                </div>
+
+                <div class="page-card" data-page="module8">
+                    <i class="fas fa-database"></i>
+                    <h3>کار با فایل‌ها</h3>
+                    <p>خواندن و نوشتن انواع فایل‌های متنی و باینری</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 1: تفکر برنامه‌نویسی -->
+        <section id="module1" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-brain"></i> ماژول 1: تفکر برنامه‌نویسی</h1>
+                    <p>یادگیری اصول حل مسئله و طراحی الگوریتم برای برنامه‌نویسی حرفه‌ای</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۴ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۸ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۳ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">مقدمه‌ای بر تفکر الگوریتمی</h2>
+                <p>تفکر برنامه‌نویسی (Computational Thinking) یک مهارت اساسی در دنیای دیجیتال امروز است که به شما
+                    توانایی حل مسائل پیچیده را با رویکردی سیستماتیک می‌دهد. این ماژول پایه و اساس تمام مهارت‌های
+                    برنامه‌نویسی شما را تشکیل می‌دهد.</p>
+
+                <p>در این ماژول یاد می‌گیرید که چگونه مسائل پیچیده را به بخش‌های کوچکتر و قابل مدیریت تقسیم کنید،
+                    الگوهای موجود در مسائل را شناسایی کنید، و راه‌حل‌های کارآمدی طراحی نمایید که کامپیوترها بتوانند آنها
+                    را اجرا کنند. این مهارت نه تنها در برنامه‌نویسی، بلکه در حل مسائل روزمره زندگی نیز به کار می‌آید.
+                </p>
+
+                <h2 class="section-title">مفاهیم کلیدی تفکر برنامه‌نویسی</h2>
+                <ul>
+                    <li><strong>تجزیه (Decomposition)</strong>: تقسیم مسئله بزرگ به زیرمسائل کوچکتر و قابل مدیریت</li>
+                    <li><strong>تشخیص الگو (Pattern Recognition)</strong>: شناسایی شباهت‌ها و تفاوت‌ها در مسائل برای
+                        استفاده از راه‌حل‌های موجود</li>
+                    <li><strong>انتزاع (Abstraction)</strong>: تمرکز بر اطلاعات و ویژگی‌های ضروری و نادیده گرفتن جزئیات
+                        غیرضروری</li>
+                    <li><strong>الگوریتم‌سازی (Algorithm Design)</strong>: طراحی گام‌به‌گام دستورالعمل‌ها برای حل مسئله
+                    </li>
+                    <li><strong>بهینه‌سازی (Optimization)</strong>: بهبود راه‌حل‌ها برای کارایی بهتر و مصرف منابع کمتر
+                    </li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong>نکته مهم:</strong> تفکر برنامه‌نویسی یک مهارت ذهنی است که با تمرین و تکرار توسعه می‌یابد.
+                        سعی کنید مسائل روزمره خود را با این رویکرد تحلیل کنید. مثلاً هنگام پختن غذا، مراحل کار را به
+                        صورت الگوریتمی در ذهن خود طراحی کنید.</p>
+                </div>
+
+                <h2 class="section-title">نمونه فلوچارت ماشین حساب</h2>
+                <p>فلوچارت یک روش بصری برای نمایش الگوریتم‌ها است. در زیر فلوچارت یک ماشین حساب ساده را مشاهده می‌کنید:
+                </p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">فلوچارت ماشین حساب</div>
+                    </div>
+                    <pre>
+شروع
+  دریافت عملیات (+, -, *, /)
+  دریافت عدد اول
+  دریافت عدد دوم
+  
+  اگر عملیات + باشد:
+      نتیجه = عدد اول + عدد دوم
+  اگر عملیات - باشد:
+      نتیجه = عدد اول - عدد دوم
+  اگر عملیات * باشد:
+      نتیجه = عدد اول * عدد دوم
+  اگر عملیات / باشد:
+      اگر عدد دوم برابر 0 نباشد:
+          نتیجه = عدد اول / عدد دوم
+      در غیر این صورت:
+          نمایش خطا "تقسیم بر صفر امکان‌پذیر نیست"
+  
+  نمایش نتیجه
+پایان
+                    </pre>
+                </div>
+
+                <h2 class="section-title">تمرین: طراحی الگوریتم سیستم ورود</h2>
+                <div class="exercise-box">
+                    <div class="exercise-header">
+                        <h3 class="exercise-title"><i class="fas fa-tasks"></i> طراحی سیستم ورود کاربر</h3>
+                        <div class="exercise-actions">
+                            <button class="action-btn solution-btn">
+                                <i class="fas fa-code"></i> نمایش راه‌حل
+                            </button>
+                        </div>
+                    </div>
+                    <div class="exercise-content">
+                        <p>سیستمی طراحی کنید که کاربر بتواند با نام کاربری و رمز عبور وارد شود. سیستم باید شرایط زیر را
+                            داشته باشد:</p>
+                        <ul>
+                            <li>نام کاربری باید حداقل ۵ کاراکتر داشته باشد</li>
+                            <li>رمز عبور باید حداقل ۸ کاراکتر و شامل حروف و اعداد باشد</li>
+                            <li>اگر کاربر اطلاعات را اشتباه وارد کرد، حداکثر ۳ بار فرصت تلاش مجدد دارد</li>
+                            <li>پس از ۳ بار تلاش ناموفق، حساب کاربری به مدت ۱۰ دقیقه قفل شود</li>
+                        </ul>
+                    </div>
+                    <div class="exercise-result" id="login-solution">
+                        <pre>
+الگوریتم سیستم ورود کاربر:
+1. شروع
+2. دریافت نام کاربری و رمز عبور
+3. اگر طول نام کاربری کمتر از 5 باشد:
+       نمایش خطا "نام کاربری باید حداقل 5 کاراکتر باشد"
+       بازگشت به مرحله 2
+4. اگر رمز عبور کمتر از 8 کاراکتر داشته باشد یا شامل حروف و اعداد نباشد:
+       نمایش خطا "رمز عبور باید حداقل 8 کاراکتر و شامل حروف و اعداد باشد"
+       بازگشت به مرحله 2
+5. اگر اعتبارسنجی موفقیت‌آمیز بود:
+       ورود موفق
+6. در غیر این صورت:
+       افزایش شمارنده خطا
+       اگر شمارنده خطا کمتر از 3 بود:
+           نمایش "اطلاعات نادرست، تلاش مجدد"
+           بازگشت به مرحله 2
+       در غیر این صورت:
+           قفل حساب به مدت 10 دقیقه
+7. پایان
+                        </pre>
+                    </div>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 2: محیط‌های توسعه -->
+        <section id="module2" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-laptop"></i> ماژول 2: محیط‌های توسعه</h1>
+                    <p>راه‌اندازی و پیکربندی محیط توسعه حرفه‌ای برای کدنویسی</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۲ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۶ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۲ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">آشنایی با محیط‌های توسعه</h2>
+                <p>یک محیط توسعه یکپارچه (IDE) ابزاری ضروری برای برنامه‌نویسان حرفه‌ای است که تمام امکانات لازم برای
+                    توسعه نرم‌افزار را در یک محیط واحد فراهم می‌کند. در این ماژول با بهترین ابزارهای توسعه آشنا می‌شوید
+                    و یاد می‌گیرید چگونه محیط کاری خود را بهینه کنید.</p>
+
+                <h2 class="section-title">مهم‌ترین ابزارهای توسعه</h2>
+                <ul>
+                    <li><strong>VS Code</strong>: ویرایشگر کد قدرتمند و سبک با هزاران افزونه کاربردی</li>
+                    <li><strong>PyCharm</strong>: محیط توسعه تخصصی برای برنامه‌نویسی پایتون</li>
+                    <li><strong>IntelliJ IDEA</strong>: IDE حرفه‌ای برای توسعه جاوا و سایر زبان‌های JVM</li>
+                    <li><strong>Git و GitHub</strong>: سیستم کنترل نسخه برای مدیریت کد و همکاری تیمی</li>
+                    <li><strong>Docker</strong>: پلتفرم کانتینری‌سازی برای ایجاد محیط‌های توسعه یکسان</li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong>نکته حرفه‌ای:</strong> برای افزایش بهره‌وری، افزونه‌های زیر را در VS Code نصب کنید:
+                        ESLint (برای بررسی کد جاوااسکریپت)، Prettier (برای فرمت‌بندی خودکار کد)، Python (برای پشتیبانی
+                        از پایتون)، GitLens (برای مشاهده تاریخچه تغییرات)، Live Server (برای اجرای سریع کدهای وب).</p>
+                </div>
+
+                <h2 class="section-title">پیکربندی VS Code برای توسعه پایتون</h2>
+                <p>برای پیکربندی بهینه VS Code برای توسعه پایتون، مراحل زیر را دنبال کنید:</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">settings.json</div>
+                        <button class="copy-btn">
+                            <i class="fas fa-copy"></i> کپی کد
+                        </button>
+                    </div>
+                    <pre>
+{
+    "python.pythonPath": "/usr/bin/python3",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=88"],
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "workbench.colorTheme": "Default Dark+",
+    "python.autoComplete.addBrackets": true,
+    "python.analysis.typeCheckingMode": "basic"
+}
+                    </pre>
+                </div>
+
+                <h2 class="section-title">تمرین: نصب و پیکربندی محیط توسعه</h2>
+                <div class="exercise-box">
+                    <div class="exercise-header">
+                        <h3 class="exercise-title"><i class="fas fa-tasks"></i> راه‌اندازی محیط توسعه پایتون</h3>
+                        <div class="exercise-actions">
+                            <button class="action-btn run-btn">
+                                <i class="fas fa-play"></i> اجرای پروژه
+                            </button>
+                            <button class="action-btn solution-btn">
+                                <i class="fas fa-code"></i> نمایش راه‌حل
+                            </button>
+                        </div>
+                    </div>
+                    <div class="exercise-content">
+                        <p>پروژه‌ای را با مشخصات زیر ایجاد و پیکربندی کنید:</p>
+                        <ul>
+                            <li>ایجاد محیط مجازی پایتون با نام venv</li>
+                            <li>نصب پکیج‌های ضروری: numpy, pandas, matplotlib</li>
+                            <li>پیکربندی VS Code برای استفاده از محیط مجازی ایجاد شده</li>
+                            <li>ایجاد یک فایل requirements.txt برای مدیریت وابستگی‌ها</li>
+                            <li>تنظیم لینتر و فرمتر برای استانداردسازی کد</li>
+                        </ul>
+                    </div>
+                    <div class="exercise-result" id="env-solution">
+                        <pre>
+# ایجاد محیط مجازی
+python -m venv venv
+
+# فعال‌سازی محیط مجازی (ویندوز)
+venv\Scripts\activate
+
+# فعال‌سازی محیط مجازی (لینوکس/مک)
+source venv/bin/activate
+
+# نصب پکیج‌ها
+pip install numpy pandas matplotlib
+
+# ایجاد فایل requirements.txt
+pip freeze > requirements.txt
+
+# پیکربندی VS Code
+# اضافه کردن مسیر مفسر پایتون محیط مجازی به settings.json
+{
+    "python.pythonPath": "venv/bin/python"
+}
+                        </pre>
+                    </div>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 3: مفاهیم پایه -->
+        <section id="module3" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-cogs"></i> ماژول 3: مفاهیم پایه برنامه‌نویسی</h1>
+                    <p>آشنایی با اصول اولیه و مفاهیم اساسی برنامه‌نویسی</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۰ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۱۰ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۴ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">انواع داده و متغیرها</h2>
+                <p>در برنامه‌نویسی، داده‌ها انواع مختلفی دارند که هر کدام برای هدف خاصی استفاده می‌شوند. آشنایی با انواع
+                    داده اولین قدم در یادگیری برنامه‌نویسی است.</p>
+
+                <h2 class="section-title">انواع داده اصلی</h2>
+                <ul>
+                    <li><strong>اعداد صحیح (Integer)</strong>: برای ذخیره اعداد بدون اعشار</li>
+                    <li><strong>اعداد اعشاری (Float)</strong>: برای ذخیره اعداد با دقت اعشار</li>
+                    <li><strong>رشته‌ها (String)</strong>: برای ذخیره متن و کاراکترها</li>
+                    <li><strong>مقادیر بولی (Boolean)</strong>: برای ذخیره مقادیر درست یا نادرست</li>
+                    <li><strong>لیست‌ها (List)</strong>: برای ذخیره مجموعه‌ای از مقادیر مرتب</li>
+                    <li><strong>دیکشنری‌ها (Dictionary)</strong>: برای ذخیره داده‌های کلید-مقدار</li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong>نکته مهم:</strong> انتخاب نوع داده مناسب برای متغیرها تأثیر مستقیمی بر عملکرد و خوانایی
+                        کد دارد. همیشه از مناسب‌ترین نوع داده برای ذخیره اطلاعات استفاده کنید.</p>
+                </div>
+
+                <h2 class="section-title">عملگرهای اصلی در برنامه‌نویسی</h2>
+                <p>عملگرها ابزارهایی برای انجام عملیات روی داده‌ها هستند. در زیر مهم‌ترین عملگرها در پایتون را مشاهده
+                    می‌کنید:</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">عملگرها در پایتون</div>
+                    </div>
+                    <pre>
+# عملگرهای محاسباتی
+جمع = 10 + 5       # 15
+تفریق = 10 - 5     # 5
+ضرب = 10 * 5       # 50
+تقسیم = 10 / 5     # 2.0
+تقسیم صحیح = 10 // 3  # 3
+باقیمانده = 10 % 3   # 1
+توان = 2 ** 3      # 8
+
+# عملگرهای مقایسه‌ای
+مساوی = 10 == 10   # True
+نابرابر = 10 != 5  # True
+بزرگتر = 10 > 5    # True
+کوچکتر = 10 < 5    # False
+بزرگتر مساوی = 10 >= 10  # True
+کوچکتر مساوی = 5 <= 10   # True
+
+# عملگرهای منطقی
+و = True and False  # False
+یا = True or False  # True
+نقیض = not True     # False
+                    </pre>
+                </div>
+
+                <h2 class="section-title">تمرین: ماشین حساب ساده</h2>
+                <div class="exercise-box">
+                    <div class="exercise-header">
+                        <h3 class="exercise-title"><i class="fas fa-calculator"></i> پیاده‌سازی ماشین حساب</h3>
+                        <div class="exercise-actions">
+                            <button class="action-btn run-btn">
+                                <i class="fas fa-play"></i> اجرای کد
+                            </button>
+                            <button class="action-btn solution-btn">
+                                <i class="fas fa-code"></i> نمایش راه‌حل
+                            </button>
+                        </div>
+                    </div>
+                    <div class="exercise-content">
+                        <p>برنامه‌ای بنویسید که دو عدد و یک عملگر (+, -, *, /) از کاربر دریافت کند و نتیجه عملیات را
+                            نمایش دهد. برنامه باید موارد زیر را بررسی کند:</p>
+                        <ul>
+                            <li>اعتبارسنجی ورودی‌ها (اعداد باید معتبر باشند)</li>
+                            <li>در صورت تقسیم بر صفر، پیغام خطای مناسب نمایش داده شود</li>
+                            <li>پس از نمایش نتیجه، از کاربر بپرسد که آیا می‌خواهد عملیات دیگری انجام دهد یا خیر</li>
+                        </ul>
+                    </div>
+                    <div class="exercise-result" id="calc-solution">
+                        <pre>
+while True:
+    try:
+        num1 = float(input("عدد اول را وارد کنید: "))
+        operator = input("عملگر (+, -, *, /) را وارد کنید: ")
+        num2 = float(input("عدد دوم را وارد کنید: "))
+        
+        if operator == '+':
+            result = num1 + num2
+        elif operator == '-':
+            result = num1 - num2
+        elif operator == '*':
+            result = num1 * num2
+        elif operator == '/':
+            if num2 == 0:
+                print("خطا: تقسیم بر صفر امکان‌پذیر نیست!")
+                continue
+            result = num1 / num2
+        else:
+            print("عملگر نامعتبر!")
+            continue
+            
+        print(f"نتیجه: {num1} {operator} {num2} = {result}")
+        
+    except ValueError:
+        print("خطا: لطفاً عدد معتبر وارد کنید!")
+    
+    repeat = input("آیا می‌خواهید ادامه دهید؟ (بله/خیر): ")
+    if repeat.lower() != 'بله':
+        break
+                        </pre>
+                    </div>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 4: ساختارهای کنترلی -->
+        <section id="module4" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-project-diagram"></i> ماژول 4: ساختارهای کنترلی</h1>
+                    <p>کنترل جریان اجرای برنامه با دستورات شرطی و حلقه‌ها</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۲ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۷ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۳ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">دستورات شرطی</h2>
+                <p>دستورات شرطی به برنامه اجازه می‌دهند بر اساس شرایط مختلف، مسیرهای اجرایی متفاوتی را طی کند. این
+                    ساختارها پایه و اساس منطق برنامه‌نویسی هستند.</p>
+
+                <h2 class="section-title">انواع دستورات شرطی</h2>
+                <ul>
+                    <li><strong>if</strong>: اجرای بلوک کد در صورت برقراری شرط</li>
+                    <li><strong>else</strong>: اجرای بلوک کد در صورت عدم برقراری شرط if</li>
+                    <li><strong>elif</strong>: بررسی شرط‌های متوالی در صورت عدم برقراری شرط‌های قبلی</li>
+                    <li><strong>شرط‌های تو در تو</strong>: استفاده از شرط‌های چند سطحی برای پیاده‌سازی منطق پیچیده</li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong>نکته حرفه‌ای:</strong> از شرط‌های پیچیده و تو در تو پرهیز کنید. اگر تعداد شرط‌های شما
+                        بیشتر از ۳ سطح شد، بهتر است از ساختار switch-case (در زبان‌های پشتیبانی کننده) یا دیکشنری‌های
+                        تابعی استفاده کنید.</p>
+                </div>
+
+                <h2 class="section-title">پیاده‌سازی سیستم نمره‌دهی</h2>
+                <p>برنامه‌ای بنویسید که نمره دانشجو را دریافت کرده و وضعیت تحصیلی او را تعیین کند:</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">سیستم نمره‌دهی</div>
+                    </div>
+                    <pre>
+نمره = float(input("نمره دانشجو را وارد کنید: "))
+
+if نمره >= 90:
+    وضعیت = "A"
+elif نمره >= 80:
+    وضعیت = "B"
+elif نمره >= 70:
+    وضعیت = "C"
+elif نمره >= 60:
+    وضعیت = "D"
+else:
+    وضعیت = "F"
+
+print(f"وضعیت تحصیلی: {وضعیت}")
+                    </pre>
+                </div>
+
+                <h2 class="section-title">حلقه‌های تکرار</h2>
+                <p>حلقه‌ها برای تکرار یک بلوک کد به تعداد مشخص یا تا زمانی که شرط خاصی برقرار باشد استفاده می‌شوند.</p>
+
+                <h3>انواع حلقه‌ها</h3>
+                <ul>
+                    <li><strong>for</strong>: برای تکرار روی عناصر یک دنباله (لیست، رشته، دیکشنری و...)</li>
+                    <li><strong>while</strong>: برای تکرار تا زمانی که شرط خاصی برقرار باشد</li>
+                    <li><strong>break</strong>: خروج زودرس از حلقه</li>
+                    <li><strong>continue</strong>: رد شدن به تکرار بعدی حلقه</li>
+                </ul>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">مثال‌هایی از حلقه‌ها</div>
+                    </div>
+                    <pre>
+# حلقه for
+اعداد = [1, 2, 3, 4, 5]
+مجموع = 0
+for عدد in اعداد:
+    مجموع += عدد
+print(f"مجموع اعداد: {مجموع}")
+
+# حلقه while
+عدد = 1
+while عدد <= 5:
+    print(عدد)
+    عدد += 1
+
+# استفاده از break و continue
+for عدد in range(1, 11):
+    if عدد % 2 == 0:
+        continue  # اعداد زوج را رد می‌کند
+    if عدد > 7:
+        break     # حلقه را متوقف می‌کند
+    print(عدد)
+                    </pre>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 5: حلقه‌ها و تکرار -->
+        <section id="module5" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-repeat"></i> ماژول 5: حلقه‌ها و تکرار</h1>
+                    <p>کار با حلقه‌های for و while برای تکرار عملیات</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۰ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۸ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۴ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">حلقه for در پایتون</h2>
+                <p>حلقه for در پایتون برای تکرار بر روی عناصر یک دنباله (لیست، تاپل، رشته، دیکشنری و...) استفاده می‌شود.
+                    این حلقه بسیار قدرتمند و انعطاف‌پذیر است.</p>
+
+                <h2 class="section-title">مثال‌های کاربردی حلقه for</h2>
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">کاربردهای حلقه for</div>
+                    </div>
+                    <pre>
+# تکرار روی لیست
+میوه‌ها = ["سیب", "موز", "گلابی"]
+for میوه in میوه‌ها:
+    print(میوه)
+
+# تکرار روی رشته
+برای حرف in "پایتون":
+    print(حرف)
+
+# تکرار با اندیس
+برای اندیس, میوه in enumerate(میوه‌ها):
+    print(f"اندیس {اندیس}: {میوه}")
+
+# تکرار روی دیکشنری
+کاربر = {"نام": "علی", "سن": 25, "شهر": "تهران"}
+برای کلید, مقدار in کاربر.items():
+    print(f"{کلید}: {مقدار}")
+
+# حلقه تو در تو
+برای i in range(3):
+    برای j in range(2):
+        print(f"({i}, {j})")
+                    </pre>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong>نکته حرفه‌ای:</strong> از لیست کامپری‌شن‌ها برای ایجاد لیست‌های جدید از روی لیست‌های
+                        موجود استفاده کنید. این روش هم کوتاه‌تر است و هم کارایی بهتری دارد.</p>
+                </div>
+
+                <h2 class="section-title">حلقه while</h2>
+                <p>حلقه while تا زمانی که شرط آن درست باشد، بلوک کد خود را اجرا می‌کند. این حلقه برای موقعیت‌هایی که
+                    تعداد تکرارها از قبل مشخص نیست مفید است.</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">مثال‌هایی از حلقه while</div>
+                    </div>
+                    <pre>
+# مثال ساده
+عدد = 1
+while عدد <= 5:
+    print(عدد)
+    عدد += 1
+
+# ورودی کاربر
+مجموع = 0
+while True:
+    ورودی = input("عدد وارد کنید (خروج برای خاتمه): ")
+    if ورودی == "خروج":
+        break
+    try:
+        عدد = float(ورودی)
+        مجموع += عدد
+    except ValueError:
+        print("لطفاً عدد معتبر وارد کنید!")
+print(f"مجموع اعداد: {مجموع}")
+
+# حلقه با شرط ترکیبی
+کلمه = ""
+while کلمه != "پایان":
+    کلمه = input("کلمه وارد کنید (پایان برای خاتمه): ")
+    print(f"شما وارد کردید: {کلمه}")
+                    </pre>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 6: ساختمان داده‌ها -->
+        <section id="module6" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-box"></i> ماژول 6: ساختمان داده‌ها</h1>
+                    <p>کار با لیست‌ها، آرایه‌ها، مجموعه‌ها و دیکشنری‌ها</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۶ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۱۲ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۵ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">لیست‌ها در پایتون</h2>
+                <p>لیست‌ها یکی از پرکاربردترین ساختمان داده‌ها در پایتون هستند که مجموعه‌ای مرتب و قابل تغییر از عناصر
+                    را نگهداری می‌کنند.</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">عملیات رایج روی لیست‌ها</div>
+                    </div>
+                    <pre>
+# ایجاد لیست
+اعداد = [1, 2, 3, 4, 5]
+میوه‌ها = ["سیب", "موز", "پرتقال"]
+
+# دسترسی به عناصر
+اولین_عنصر = اعداد[0]    # 1
+آخرین_عنصر = اعداد[-1]   # 5
+
+# برش‌زدن لیست
+زیرمجموعه = اعداد[1:4]   # [2, 3, 4]
+
+# افزودن عنصر جدید
+اعداد.append(6)          # [1, 2, 3, 4, 5, 6]
+اعداد.insert(0, 0)       # [0, 1, 2, 3, 4, 5, 6]
+
+# حذف عناصر
+حذف_شده = اعداد.pop()    # 6
+del اعداد[0]             # [1, 2, 3, 4, 5]
+اعداد.remove(3)          # [1, 2, 4, 5]
+
+# مرتب‌سازی
+اعداد.sort()             # [1, 2, 4, 5]
+اعداد.sort(reverse=True) # [5, 4, 2, 1]
+
+# لیست کامپری‌شن
+مربعات = [x**2 for x in range(1, 6)]  # [1, 4, 9, 16, 25]
+                    </pre>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong>نکته حرفه‌ای:</strong> برای کار با لیست‌های بزرگ از ماژول array استفاده کنید که کارایی
+                        بهتری دارد. همچنین برای عملیات‌های ریاضی از NumPy استفاده کنید که سرعت بسیار بالاتری دارد.</p>
+                </div>
+
+                <h2 class="section-title">دیکشنری‌ها</h2>
+                <p>دیکشنری‌ها ساختمان داده‌ای برای ذخیره جفت‌های کلید-مقدار هستند. این ساختمان داده برای نگاشت‌ها و
+                    جستجوهای سریع بسیار مناسب است.</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">عملیات رایج روی دیکشنری‌ها</div>
+                    </div>
+                    <pre>
+# ایجاد دیکشنری
+کاربر = {
+    "نام": "علی",
+    "سن": 25,
+    "شهر": "تهران"
+}
+
+# دسترسی به مقادیر
+نام = کاربر["نام"]  # "علی"
+
+# افزودن یا به‌روزرسانی
+کاربر["شغل"] = "برنامه‌نویس"  # افزودن کلید جدید
+کاربر["سن"] = 26              # به‌روزرسانی مقدار
+
+# حذف
+del کاربر["شهر"]  # حذف کلید شهر
+سن = کاربر.pop("سن")  # حذف و بازگشت مقدار
+
+# روش‌های تکرار
+for کلید in کاربر.keys():
+    print(کلید)
+
+for مقدار in کاربر.values():
+    print(مقدار)
+
+for کلید, مقدار in کاربر.items():
+    print(f"{کلید}: {مقدار}")
+
+# دیکشنری کامپری‌شن
+مربعات = {x: x**2 for x in range(1, 6)}  # {1:1, 2:4, 3:9, 4:16, 5:25}
+                    </pre>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 7: توابع و ماژول‌ها -->
+        <section id="module7" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-cube"></i> ماژول 7: توابع و ماژول‌ها</h1>
+                    <p>ایجاد توابع و ماژول‌های قابل استفاده مجدد</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۱۴ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۹ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۴ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">تعریف و استفاده از توابع</h2>
+                <p>توابع بلوک‌های کد قابل استفاده مجدد هستند که یک کار خاص را انجام می‌دهند. استفاده از توابع کد را
+                    ماژولار و قابل نگهداری می‌کند.</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">مثال‌هایی از توابع</div>
+                    </div>
+                    <pre>
+# تعریف تابع ساده
+def سلام(نام):
+    print(f"سلام {نام}!")
+
+# فراخوانی تابع
+سلام("علی")  # خروجی: سلام علی!
+
+# تابع با مقدار بازگشتی
+def جمع(الف, ب):
+    return الف + ب
+
+نتیجه = جمع(3, 5)  # 8
+
+# پارامترهای پیش‌فرض
+def توان(عدد, توان=2):
+    return عدد ** توان
+
+توان(3)    # 9
+توان(3, 3) # 27
+
+# پارامترهای نام‌دار
+def اطلاعات_کاربر(نام, سن, شهر):
+    print(f"نام: {نام}, سن: {سن}, شهر: {شهر}")
+
+اطلاعات_کاربر(شهر="تهران", سن=25, نام="علی")
+
+# توابع بازگشتی
+def فاکتوریل(عدد):
+    if عدد == 1:
+        return 1
+    else:
+        return عدد * فاکتوریل(عدد-1)
+
+فاکتوریل(5)  # 120
+                    </pre>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول 8: کار با فایل‌ها -->
+        <section id="module8" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-database"></i> ماژول 8: کار با فایل‌ها</h1>
+                    <p>خواندن و نوشتن فایل‌های متنی، باینری و JSON</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مدت: ۸ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> تمرینات: ۶ تمرین عملی
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> پروژه‌ها: ۳ پروژه پایانی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">کار با فایل‌های متنی</h2>
+                <p>خواندن و نوشتن فایل‌های متنی یکی از مهارت‌های پایه در برنامه‌نویسی است.</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">عملیات فایل‌های متنی</div>
+                    </div>
+                    <pre>
+# نوشتن در فایل
+با open('فایل.txt', 'w', encoding='utf-8') as فایل:
+    فایل.write("این یک خط است.\n")
+    فایل.write("این خط دوم است.\n")
+    فایل.writelines(["خط سوم\n", "خط چهارم\n"])
+
+# خواندن کل فایل
+با open('فایل.txt', 'r', encoding='utf-8') as فایل:
+    محتوا = فایل.read()
+    print(محتوا)
+
+# خواندن خط به خط
+با open('فایل.txt', 'r', encoding='utf-8') as فایل:
+    for خط in فایل:
+        print(خط.strip())
+
+# خواندن همه خطوط به صورت لیست
+با open('فایل.txt', 'r', encoding='utf-8') as فایل:
+    خطوط = فایل.readlines()
+                    </pre>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه آزمون مفاهیم پایه -->
+        <section id="quiz1" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-check-circle"></i> آزمون مفاهیم پایه برنامه‌نویسی</h1>
+                    <p>سنجش دانش و درک مفاهیم اساسی برنامه‌نویسی</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-question"></i> ۲۰ سوال
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> ۳۰ دقیقه
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-star"></i> سطح: مبتدی
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h1>آزمون مفاهیم پایه برنامه‌نویسی</h1>
+                    <p>این آزمون دانش شما را در زمینه مفاهیم اساسی برنامه‌نویسی می‌سنجد. لطفاً به تمام سوالات با دقت
+                        پاسخ دهید.</p>
+
+                    <div class="quiz-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-check-circle"></i> نمره قبولی: ۷۰٪
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-redo"></i> تلاش مجدد: نامحدود
+                        </div>
+                    </div>
+                </div>
+
+                <form id="quiz-form">
+                    <div class="quiz-question">
+                        <div class="question-text">۱. کدام یک از گزینه‌های زیر بهترین تعریف برای متغیر در برنامه‌نویسی
+                            است؟</div>
+                        <div class="options-container">
+                            <label class="option">
+                                <input type="radio" name="q1" value="a">
+                                یک مقدار ثابت که در طول برنامه تغییر نمی‌کند
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="b">
+                                یک نام نمادین برای یک محل در حافظه که داده‌ها در آن ذخیره می‌شوند
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="c">
+                                دستوری که خروجی برنامه را نمایش می‌دهد
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="d">
+                                ساختاری برای تکرار عملیات
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <div class="question-text">۲. در برنامه‌نویسی، حلقه‌ها (Loops) برای چه منظوری استفاده می‌شوند؟
+                        </div>
+                        <div class="options-container">
+                            <label class="option">
+                                <input type="radio" name="q2" value="a">
+                                ذخیره داده‌ها در حافظه
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="b">
+                                ایجاد شرط‌های مختلف در برنامه
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="c">
+                                تکرار یک بلوک کد چندین بار
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="d">
+                                تعریف توابع جدید
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <div class="question-text">۳. دستور if-else در برنامه‌نویسی چه کاری انجام می‌دهد؟</div>
+                        <div class="options-container">
+                            <label class="option">
+                                <input type="radio" name="q3" value="a">
+                                تعریف یک حلقه تکرار
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="b">
+                                ایجاد یک تابع جدید
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="c">
+                                اجرای کدهای مختلف بر اساس یک شرط
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="d">
+                                ذخیره داده‌ها در یک فایل
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <div class="question-text">۴. در برنامه‌نویسی، تابع (Function) چیست؟</div>
+                        <div class="options-container">
+                            <label class="option">
+                                <input type="radio" name="q4" value="a">
+                                یک متغیر خاص که مقادیر مختلف را نگه می‌دارد
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="b">
+                                بلوکی از کد که یک کار خاص را انجام می‌دهد و می‌تواند چندین بار فراخوانی شود
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="c">
+                                دستوری برای خاتمه برنامه
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="d">
+                                ساختاری برای مدیریت خطاها
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <div class="question-text">۵. کدام یک از گزینه‌های زیر یک نوع داده (Data Type) در برنامه‌نویسی
+                            نیست؟</div>
+                        <div class="options-container">
+                            <label class="option">
+                                <input type="radio" name="q5" value="a">
+                                عدد صحیح (Integer)
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="b">
+                                رشته (String)
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="c">
+                                شرط (Condition)
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="d">
+                                بولین (Boolean)
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> ارسال پاسخ‌ها
+                    </button>
+                </form>
+
+                <div class="quiz-result" id="quiz-result">
+                    <h2>نتیجه آزمون</h2>
+                    <div class="result-score" id="score">0/5</div>
+                    <div class="result-message" id="message">در حال محاسبه نتیجه...</div>
+                    <button class="restart-btn" id="restart-btn">
+                        <i class="fas fa-redo"></i> آزمون مجدد
+                    </button>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn" data-page="home" style="display: block; text-align: center; margin-top: 40px;">
+                <i class="fas fa-arrow-right"></i>
+                بازگشت به صفحه اصلی
+            </a>
+        </section>
+
+        <!-- صفحه تمرین 1: ماشین حساب -->
+        <section id="exercise1" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-pencil-alt"></i> تمرین 1: ماشین حساب پیشرفته</h1>
+                    <p>پیاده‌سازی ماشین حساب با قابلیت‌های محاسباتی پیشرفته</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-star"></i> سطح: متوسط
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> زمان تخمینی: ۱ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-code"></i> زبان: پایتون
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">مشخصات تمرین</h2>
+                <p>در این تمرین، یک ماشین حساب پیشرفته پیاده‌سازی می‌کنید که قابلیت‌های زیر را داشته باشد:</p>
+
+                <ul>
+                    <li>عملیات‌های پایه: جمع، تفریق، ضرب، تقسیم</li>
+                    <li>عملیات‌های پیشرفته: توان، جذر، لگاریتم، مثلثات</li>
+                    <li>تبدیل واحدها: دما (سانتیگراد به فارنهایت و بالعکس)، طول، وزن</li>
+                    <li>حافظه برای ذخیره نتایج محاسبات</li>
+                    <li>رابط کاربری متنی ساده و قابل فهم</li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong>نکته طراحی:</strong> برای پیاده‌سازی تمیز و ماژولار، هر بخش از ماشین حساب را در توابع
+                        جداگانه پیاده‌سازی کنید. از یک دیکشنری برای نگاشت نام عملیات به توابع مربوطه استفاده کنید.</p>
+                </div>
+
+                <h2 class="section-title">راهنمای پیاده‌سازی</h2>
+                <p>برای پیاده‌سازی این ماشین حساب، مراحل زیر را دنبال کنید:</p>
+
+                <div class="code-sample">
+                    <div class="code-header">
+                        <div class="code-title">ساختار کلی برنامه</div>
+                    </div>
+                    <pre>
+import math
+
+# توابع عملیات پایه
+def جمع(الف, ب):
+    return الف + ب
+
+def تفریق(الف, ب):
+    return الف - ب
+
+# توابع عملیات پیشرفته
+def توان(الف, ب):
+    return الف ** ب
+
+def جذر(الف):
+    return math.sqrt(الف)
+
+# توابع تبدیل واحد
+def سانتیگراد_به_فارنهایت(سانتیگراد):
+    return (سانتیگراد * 9/5) + 32
+
+def فارنهایت_به_سانتیگراد(فارنهایت):
+    return (فارنهایت - 32) * 5/9
+
+# منوی اصلی
+def نمایش_منو():
+    print("1. عملیات پایه")
+    print("2. عملیات پیشرفته")
+    print("3. تبدیل واحدها")
+    print("4. خروج")
+
+# برنامه اصلی
+if __name__ == "__main__":
+    while True:
+        نمایش_منو()
+        انتخاب = input("لطفاً گزینه مورد نظر را انتخاب کنید: ")
+        
+        if انتخاب == "4":
+            break
+        
+        # پردازش انتخاب کاربر
+        # ...
+                    </pre>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه ماژول‌ها -->
+        <section id="modules" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-book-open"></i> همه ماژول‌های آموزشی</h1>
+                    <p>دسترسی به تمام ۱۶ ماژول آموزشی دوره برنامه‌نویسی</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> مجموع ساعت: ۱۶۸ ساعت
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> مجموع تمرینات: ۸۵ تمرین
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> مجموع پروژه‌ها: ۶۵ پروژه
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">ماژول‌های دوره برنامه‌نویسی</h2>
+                <p>دوره جامع برنامه‌نویسی شامل ۱۶ ماژول آموزشی است که از مفاهیم پایه تا پیشرفته را پوشش می‌دهد. هر ماژول
+                    شامل درس‌های تئوری، تمرینات عملی و پروژه‌های کاربردی می‌شود.</p>
+
+                <div class="module-grid">
+                    <div class="module-card">
+                        <h3><i class="fas fa-brain"></i> ماژول 1: تفکر برنامه‌نویسی</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 14 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 8 تمرین</span>
+                        </div>
+                        <div class="description">
+                            یادگیری اصول حل مسئله، طراحی الگوریتم و فلوچارت‌نویسی برای حل مسائل پیچیده
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">حل مسئله</span>
+                            <span class="skill-tag">الگوریتم‌ها</span>
+                            <span class="skill-tag">فلوچارت</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-laptop"></i> ماژول 2: محیط‌های توسعه</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 12 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 6 تمرین</span>
+                        </div>
+                        <div class="description">
+                            راه‌اندازی محیط توسعه حرفه‌ای، کار با VS Code، Git و ابزارهای توسعه
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Git & GitHub</span>
+                            <span class="skill-tag">Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-cogs"></i> ماژول 3: مفاهیم پایه</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 10 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 10 تمرین</span>
+                        </div>
+                        <div class="description">
+                            آشنایی با متغیرها، انواع داده، عملگرها و اصول اولیه برنامه‌نویسی
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">متغیرها</span>
+                            <span class="skill-tag">انواع داده</span>
+                            <span class="skill-tag">عملگرها</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-project-diagram"></i> ماژول 4: ساختارهای کنترلی</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 12 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 7 تمرین</span>
+                        </div>
+                        <div class="description">
+                            کنترل جریان برنامه با دستورات شرطی (if/else) و حلقه‌ها (for/while)
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">شرط‌ها</span>
+                            <span class="skill-tag">حلقه‌ها</span>
+                            <span class="skill-tag">کنترل جریان</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-box"></i> ماژول 5: ساختمان داده‌ها</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 16 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 12 تمرین</span>
+                        </div>
+                        <div class="description">
+                            کار با لیست‌ها، آرایه‌ها، مجموعه‌ها، دیکشنری‌ها و ساختارهای داده پیشرفته
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">لیست‌ها</span>
+                            <span class="skill-tag">آرایه‌ها</span>
+                            <span class="skill-tag">دیکشنری</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-cube"></i> ماژول 6: توابع و ماژول‌ها</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 14 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 9 تمرین</span>
+                        </div>
+                        <div class="description">
+                            ایجاد توابع، ماژول‌ها و کتابخانه‌های قابل استفاده مجدد و مدیریت دامنه متغیرها
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">توابع</span>
+                            <span class="skill-tag">ماژول‌ها</span>
+                            <span class="skill-tag">دامنه متغیر</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-database"></i> ماژول 7: کار با فایل‌ها</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 8 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 6 تمرین</span>
+                        </div>
+                        <div class="description">
+                            خواندن و نوشتن فایل‌های متنی، باینری و فرمت‌های مختلف مانند JSON و CSV
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">فایل‌ها</span>
+                            <span class="skill-tag">JSON</span>
+                            <span class="skill-tag">CSV</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-bug"></i> ماژول 8: خطایابی و تست</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 10 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 8 تمرین</span>
+                        </div>
+                        <div class="description">
+                            تکنیک‌های خطایابی، نوشتن تست واحد و یکپارچه‌سازی
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">خطایابی</span>
+                            <span class="skill-tag">تست واحد</span>
+                            <span class="skill-tag">Debugging</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-cube"></i> ماژول 9: برنامه‌نویسی شی‌گرا</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 18 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 10 تمرین</span>
+                        </div>
+                        <div class="description">
+                            مفاهیم شی‌گرایی، کلاس‌ها، اشیاء، وراثت و چندریختی در پایتون
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">شی‌گرایی</span>
+                            <span class="skill-tag">کلاس‌ها</span>
+                            <span class="skill-tag">وراثت</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-database"></i> ماژول 10: پایگاه داده و SQL</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 14 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 8 تمرین</span>
+                        </div>
+                        <div class="description">
+                            کار با پایگاه‌های داده رابطه‌ای، SQLite، MySQL و طراحی کوئری‌های پیشرفته
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">پایگاه داده</span>
+                            <span class="skill-tag">SQLite</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-globe"></i> ماژول 11: توسعه وب با Flask</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 20 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 12 تمرین</span>
+                        </div>
+                        <div class="description">
+                            ساخت وب اپلیکیشن‌های پویا با فریم‌ورک Flask در پایتون
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">وب</span>
+                            <span class="skill-tag">API</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-server"></i> ماژول 12: توسعه وب با Django</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 25 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 15 تمرین</span>
+                        </div>
+                        <div class="description">
+                            ساخت اپلیکیشن‌های وب پیشرفته با فریم‌ورک Django
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">MVC</span>
+                            <span class="skill-tag">ORM</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-plug"></i> ماژول 13: API‌های RESTful</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 12 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 7 تمرین</span>
+                        </div>
+                        <div class="description">
+                            طراحی و پیاده‌سازی API‌های RESTful با پایتون و Django REST Framework
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">REST</span>
+                            <span class="skill-tag">API</span>
+                            <span class="skill-tag">JSON</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-mobile-alt"></i> ماژول 14: توسعه اپلیکیشن موبایل</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 18 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 10 تمرین</span>
+                        </div>
+                        <div class="description">
+                            ساخت اپلیکیشن‌های موبایل با React Native و پایتون
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">React Native</span>
+                            <span class="skill-tag">موبایل</span>
+                            <span class="skill-tag">پلتفرم‌های ترکیبی</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-chart-line"></i> ماژول 15: تحلیل داده با پایتون</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 16 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 9 تمرین</span>
+                        </div>
+                        <div class="description">
+                            تحلیل داده‌ها با کتابخانه‌های Pandas, NumPy, Matplotlib و Seaborn
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">تحلیل داده</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">تجسم داده</span>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <h3><i class="fas fa-robot"></i> ماژول 16: یادگیری ماشین پایه</h3>
+                        <div class="meta">
+                            <span><i class="far fa-clock"></i> 20 ساعت</span>
+                            <span><i class="fas fa-tasks"></i> 12 تمرین</span>
+                        </div>
+                        <div class="description">
+                            مفاهیم پایه یادگیری ماشین و پیاده‌سازی با Scikit-learn
+                        </div>
+                        <div class="skills">
+                            <span class="skill-tag">یادگیری ماشین</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">داده‌کاوی</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="#" class="action-btn" style="display: inline-flex;">
+                        <i class="fas fa-arrow-down"></i> مشاهده همه ماژول‌ها
+                    </a>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه تمرین‌ها -->
+        <section id="exercises" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-pencil-alt"></i> تمرین‌های برنامه‌نویسی</h1>
+                    <p>تمرینات عملی برای تقویت مهارت‌های برنامه‌نویسی</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-tasks"></i> مجموع تمرینات: ۸۵ تمرین
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-code"></i> زبان‌ها: پایتون، جاوااسکریپت، ++C
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">تمرین‌های طبقه‌بندی شده</h2>
+                <p>تمرینات عملی بهترین راه برای تسلط بر مفاهیم برنامه‌نویسی و ساخت نمونه کار برای رزومه هستند. در این
+                    بخش می‌توانید تمرینات
+                    طبقه‌بندی شده بر اساس سطح دشواری و موضوع را پیدا کنید.</p>
+
+                <div class="exercise-grid">
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-calculator"></i> ماشین حساب پیشرفته</h4>
+                        <span class="difficulty difficulty-medium">متوسط</span>
+                        <p>پیاده‌سازی ماشین حساب با قابلیت‌های محاسباتی پیشرفته و تبدیل واحدها</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-gamepad"></i> بازی حدس عدد</h4>
+                        <span class="difficulty difficulty-easy">آسان</span>
+                        <p>برنامه‌ای که یک عدد تصادفی تولید کرده و از کاربر می‌خواهد آن را حدس بزند</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-list-ol"></i> سیستم مدیریت وظایف</h4>
+                        <span class="difficulty difficulty-medium">متوسط</span>
+                        <p>برنامه‌ای برای مدیریت وظایف روزانه با قابلیت افزودن، حذف و به‌روزرسانی</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-chart-line"></i> تحلیل داده‌های فروش</h4>
+                        <span class="difficulty difficulty-hard">دشوار</span>
+                        <p>برنامه‌ای برای تحلیل داده‌های بورس و پیش‌بینی روند بازار</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-robot"></i> چت‌بات ساده</h4>
+                        <span class="difficulty difficulty-medium">متوسط</span>
+                        <p>پیاده‌سازی یک چت‌بات ساده که به سوالات کاربر پاسخ می‌دهد</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-shopping-cart"></i> سیستم فروشگاه آنلاین</h4>
+                        <span class="difficulty difficulty-hard">دشوار</span>
+                        <p>پیاده‌سازی سیستم مدیریت فروشگاه آنلاین با سبد خرید و پرداخت</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-address-book"></i> دفترچه تلفن</h4>
+                        <span class="difficulty difficulty-easy">آسان</span>
+                        <p>برنامه‌ای برای ذخیره و مدیریت مخاطبین و اطلاعات تماس</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-thermometer-half"></i> مبدل دما</h4>
+                        <span class="difficulty difficulty-easy">آسان</span>
+                        <p>تبدیل واحدهای دما (سانتیگراد، فارنهایت، کلوین) به یکدیگر</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-database"></i> سیستم مدیریت کتابخانه</h4>
+                        <span class="difficulty difficulty-medium">متوسط</span>
+                        <p>سیستمی برای مدیریت کتاب‌ها، اعضا و امانت‌های کتابخانه</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-chart-pie"></i> تولید گزارش آماری</h4>
+                        <span class="difficulty difficulty-medium">متوسط</span>
+                        <p>تحلیل داده‌ها و تولید گزارش‌های گرافیکی و نمودارهای آماری</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-lock"></i> سیستم رمزنگاری</h4>
+                        <span class="difficulty difficulty-hard">دشوار</span>
+                        <p>پیاده‌سازی الگوریتم‌های رمزنگاری مانند AES و RSA</p>
+                    </div>
+
+                    <div class="exercise-item">
+                        <h4><i class="fas fa-brain"></i> شبکه عصبی ساده</h4>
+                        <span class="difficulty difficulty-hard">دشوار</span>
+                        <p>پیاده‌سازی یک شبکه عصبی ساده برای تشخیص اعداد دست‌نویس</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="#" class="action-btn" style="display: inline-flex;">
+                        <i class="fas fa-arrow-down"></i> مشاهده همه تمرین‌ها
+                    </a>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه آزمون‌ها -->
+        <section id="quizzes" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-check-circle"></i> آزمون‌های برنامه‌نویسی</h1>
+                    <p>سنجش دانش و مهارت‌های برنامه‌نویسی با آزمون‌های طبقه‌بندی شده</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-question"></i> مجموع سوالات: ۵۲۰ سوال
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-star"></i> سطح‌بندی: مبتدی تا پیشرفته
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">آزمون‌های طبقه‌بندی شده</h2>
+                <p>با شرکت در آزمون‌های مختلف می‌توانید سطح دانش و مهارت خود را در مفاهیم برنامه‌نویسی بسنجید و نقاط قوت
+                    و ضعف خود را شناسایی کنید.</p>
+
+                <div class="quiz-grid">
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-brain"></i> آزمون تفکر برنامه‌نویسی</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۳۰ سوال</span>
+                            <span><i class="far fa-clock"></i> ۴۵ دقیقه</span>
+                        </div>
+                        <p>سنجش توانایی حل مسئله و طراحی الگوریتم</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-cogs"></i> آزمون مفاهیم پایه</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۲۵ سوال</span>
+                            <span><i class="far fa-clock"></i> ۳۰ دقیقه</span>
+                        </div>
+                        <p>سنجش دانش متغیرها، انواع داده و عملگرها</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-project-diagram"></i> آزمون ساختارهای کنترلی</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۲۰ سوال</span>
+                            <span><i class="far fa-clock"></i> ۲۵ دقیقه</span>
+                        </div>
+                        <p>سنجش دانش دستورات شرطی و حلقه‌ها</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-box"></i> آزمون ساختمان داده‌ها</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۳۵ سوال</span>
+                            <span><i class="far fa-clock"></i> ۵۰ دقیقه</span>
+                        </div>
+                        <p>سنجش دانش لیست‌ها، آرایه‌ها و دیکشنری‌ها</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-cube"></i> آزمون توابع و ماژول‌ها</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۲۸ سوال</span>
+                            <span><i class="far fa-clock"></i> ۳۵ دقیقه</span>
+                        </div>
+                        <p>سنجش دانش تعریف و استفاده از توابع و ماژول‌ها</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-bug"></i> آزمون خطایابی و تست</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۳۰ سوال</span>
+                            <span><i class="far fa-clock"></i> ۴۰ دقیقه</span>
+                        </div>
+                        <p>سنجش توانایی شناسایی و رفع خطاها و نوشتن تست</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 55%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-database"></i> آزمون پایگاه داده</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۴۰ سوال</span>
+                            <span><i class="far fa-clock"></i> ۶۰ دقیقه</span>
+                        </div>
+                        <p>سنجش دانش طراحی پایگاه داده و نوشتن کوئری‌های SQL</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 50%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h3><i class="fas fa-globe"></i> آزمون توسعه وب</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-question"></i> ۵۰ سوال</span>
+                            <span><i class="far fa-clock"></i> ۷۵ دقیقه</span>
+                        </div>
+                        <p>سنجش دانش مفاهیم توسعه وب و فریم‌ورک‌های پایتون</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%;"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="#" class="action-btn" style="display: inline-flex; padding: 10px 25px;">
+                                <i class="fas fa-play"></i> شروع آزمون
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="#" class="action-btn" style="display: inline-flex;">
+                        <i class="fas fa-arrow-down"></i> مشاهده همه آزمون‌ها
+                    </a>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- صفحه پروژه‌ها -->
+        <section id="projects" class="page">
+            <div class="module-header">
+                <div class="module-header-content">
+                    <h1><i class="fas fa-project-diagram"></i> پروژه‌های برنامه‌نویسی</h1>
+                    <p>پروژه‌های عملی برای ساخت رزومه و نمونه کار</p>
+
+                    <div class="module-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-project-diagram"></i> مجموع پروژه‌ها: ۶۵ پروژه
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-code"></i> زبان‌ها: پایتون، جاوااسکریپت، ++C
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <h2 class="section-title">پروژه‌های کاربردی</h2>
+                <p>پروژه‌های عملی بهترین راه برای به کارگیری دانش برنامه‌نویسی و ساخت نمونه کار برای رزومه هستند. در این
+                    بخش می‌توانید پروژه‌های
+                    طبقه‌بندی شده بر اساس سطح دشواری و حوزه کاربردی را پیدا کنید.</p>
+
+                <div class="page-grid">
+                    <div class="page-card" data-page="project1">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>سیستم فروشگاه آنلاین</h3>
+                        <p>پیاده‌سازی کامل یک فروشگاه اینترنتی با سبد خرید و درگاه پرداخت</p>
+                    </div>
+
+                    <div class="page-card" data-page="project2">
+                        <i class="fas fa-blog"></i>
+                        <h3>سیستم مدیریت محتوا</h3>
+                        <p>ساخت یک CMS ساده برای مدیریت مقالات و محتوای وبسایت</p>
+                    </div>
+
+                    <div class="page-card" data-page="project3">
+                        <i class="fas fa-robot"></i>
+                        <h3>چت‌بات هوشمند</h3>
+                        <p>پیاده‌سازی یک چت‌بات هوشمند با قابلیت یادگیری و پاسخگویی</p>
+                    </div>
+
+                    <div class="page-card" data-page="project4">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>بازی سودوکو</h3>
+                        <p>پیاده‌سازی بازی سودوکو با قابلیت حل خودکار و تولید پازل‌های جدید</p>
+                    </div>
+
+                    <div class="page-card" data-page="project5">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>سیستم تحلیل بازار بورس</h3>
+                        <p>برنامه‌ای برای تحلیل داده‌های بورس و پیش‌بینی روند بازار</p>
+                    </div>
+
+                    <div class="page-card" data-page="project6">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>اپلیکیشن یادداشت‌برداری</h3>
+                        <p>ساخت اپلیکیشن موبایل برای مدیریت یادداشت‌ها و وظایف روزانه</p>
+                    </div>
+
+                    <div class="page-card" data-page="project7">
+                        <i class="fas fa-thermometer-half"></i>
+                        <h3>سیستم مانیتورینگ دما</h3>
+                        <p>پیاده‌سازی سیستم نظارت بر دما با قابلیت هشدار و گزارش‌گیری</p>
+                    </div>
+
+                    <div class="page-card" data-page="project8">
+                        <i class="fas fa-lock"></i>
+                        <h3>سیستم مدیریت رمز عبور</h3>
+                        <p>برنامه‌ای برای ذخیره امن رمزهای عبور و اطلاعات حساس</p>
+                    </div>
+
+                    <div class="page-card" data-page="project9">
+                        <i class="fas fa-cloud-sun"></i>
+                        <h3>اپلیکیشن پیش‌بینی هوا</h3>
+                        <p>برنامه‌ای برای نمایش اطلاعات آب و هوا و پیش‌بینی شرایط جوی</p>
+                    </div>
+
+                    <div class="page-card" data-page="project10">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>سیستم پیگیری هزینه‌ها</h3>
+                        <p>برنامه‌ای برای ردیابی مخارج شخصی و مدیریت بودجه</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="#" class="action-btn" style="display: inline-flex;">
+                        <i class="fas fa-arrow-down"></i> مشاهده همه پروژه‌ها
+                    </a>
+                </div>
+
+                <a href="#" class="back-btn" data-page="home">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </div>
+        </section>
+
+        <!-- فوتر -->
+        <footer>
+            <div class="footer-content">
+                <h2>دوره جامع برنامه‌نویسی 168 ساعته</h2>
+                <p>یادگیری برنامه‌نویسی از صفر برای افراد کاملاً مبتدی تا حرفه‌ای شدن</p>
+
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-book"></i> مستندات دوره</a>
+                    <a href="#"><i class="fas fa-video"></i> فیلم‌های آموزشی</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> پشتیبانی</a>
+                    <a href="#"><i class="fas fa-file-alt"></i> شرایط استفاده</a>
+                </div>
+
+                <div class="copyright">
+                    <p>تمامی حقوق برای دپارتمان آموزش برنامه‌نویسی محفوظ است © 2023</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // مدیریت تغییر صفحات
+        document.addEventListener('DOMContentLoaded', function () {
+            // فعال‌سازی صفحه خانه به عنوان صفحه پیش‌فرض
+            document.getElementById('home').classList.add('active');
+
+            // مدیریت کلیک روی لینک‌های ناوبری
+            const navLinks = document.querySelectorAll('.nav-links a, .logo');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            // مدیریت کلیک روی کارت‌های صفحه اصلی
+            const pageCards = document.querySelectorAll('.page-card');
+            pageCards.forEach(card => {
+                card.addEventListener('click', function () {
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            // مدیریت دکمه بازگشت
+            const backBtns = document.querySelectorAll('.back-btn');
+            backBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showPage('home');
+                });
+            });
+
+            // مدیریت دکمه نمایش راه‌حل تمرین‌ها
+            const solutionBtns = document.querySelectorAll('.solution-btn');
+            solutionBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const result = this.closest('.exercise-box').querySelector('.exercise-result');
+                    result.style.display = 'block';
+                });
+            });
+
+            // مدیریت آزمون
+            const quizForm = document.getElementById('quiz-form');
+            if (quizForm) {
+                quizForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // محاسبه نمره
+                    const answers = {
+                        'q1': 'b',
+                        'q2': 'c',
+                        'q3': 'c',
+                        'q4': 'b',
+                        'q5': 'c'
+                    };
+
+                    let score = 0;
+                    for (let i = 1; i <= 5; i++) {
+                        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                        if (selected && selected.value === answers[`q${i}`]) {
+                            score++;
+                        }
+                    }
+
+                    // نمایش نتیجه
+                    const resultDiv = document.getElementById('quiz-result');
+                    const scoreSpan = document.getElementById('score');
+                    const messageSpan = document.getElementById('message');
+
+                    scoreSpan.textContent = `${score}/5`;
+
+                    if (score >= 4) {
+                        messageSpan.textContent = "تبریک! شما با موفقیت آزمون را پشت سر گذاشتید.";
+                        messageSpan.style.color = "var(--success)";
+                    } else if (score >= 3) {
+                        messageSpan.textContent = "خوب بود! اما نیاز به مطالعه بیشتر دارید.";
+                        messageSpan.style.color = "var(--warning)";
+                    } else {
+                        messageSpan.textContent = "نیاز به تلاش بیشتر دارید. لطفاً دوباره مطالعه کنید.";
+                        messageSpan.style.color = "var(--danger)";
+                    }
+
+                    resultDiv.style.display = 'block';
+                });
+
+                // مدیریت دکمه شروع مجدد آزمون
+                const restartBtn = document.getElementById('restart-btn');
+                restartBtn.addEventListener('click', function () {
+                    document.getElementById('quiz-result').style.display = 'none';
+                    document.getElementById('quiz-form').reset();
+                });
+            }
+        });
+
+        // تابع نمایش صفحه
+        function showPage(pageId) {
+            // مخفی کردن همه صفحات
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // نمایش صفحه مورد نظر
+            document.getElementById(pageId).classList.add('active');
+
+            // به روزرسانی لینک فعال در نوار ناوبری
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // اسکرول به بالای صفحه
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چت روم هوشمند</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* استایل‌های چت روم */
+        .chat-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .chat-btn {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .chat-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-btn i {
+            font-size: 28px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(67, 97, 238, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+            }
+        }
+
+        .chat-window {
+            width: 380px;
+            height: 520px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .chat-window.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h3 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header .status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #4ade80;
+            border-radius: 50%;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /* رفع مشکل ارتفاع برای نمایش فوتر */
+            max-height: calc(100% - 130px);
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bot-message {
+            background: #e9ecef;
+            border-bottom-left-radius: 5px;
+            align-self: flex-start;
+            border: 1px solid #dee2e6;
+        }
+
+        .user-message {
+            background: #4361ee;
+            color: white;
+            border-bottom-right-radius: 5px;
+            align-self: flex-end;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 18px;
+            align-self: flex-start;
+            width: 80px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #6c757d;
+            border-radius: 50%;
+            animation: bounce 1.5s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .chat-footer {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            /* تضمین نمایش فوتر در پایین */
+            position: sticky;
+            bottom: 0;
+        }
+
+        .message-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .message-input input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid #dee2e6;
+            border-radius: 30px;
+            outline: none;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .message-input input:focus {
+            border-color: #4361ee;
+        }
+
+        .send-btn {
+            background: #4361ee;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #3a0ca3;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 15px;
+            background: #e7f5ff;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #1864ab;
+            border: 1px solid #a5d8ff;
+        }
+
+        .info-card {
+            background: #fff9db;
+            border: 1px solid #ffd43b;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #5f3dc4;
+        }
+
+        .info-card h4 {
+            margin-bottom: 8px;
+            color: #3b5bdb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggested-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .question-btn {
+            background: #edf2ff;
+            color: #3b5bdb;
+            border: 1px solid #dbe4ff;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .question-btn:hover {
+            background: #dbe4ff;
+            transform: translateY(-2px);
+        }
+
+        /* استایل‌های ریسپانسیو */
+        @media (max-width: 480px) {
+            .chat-window {
+                width: 320px;
+                height: 450px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .chat-header h3 {
+                font-size: 1.1rem;
+            }
+
+            .chat-body {
+                max-height: calc(100% - 120px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- چت روم در پایین سمت راست -->
+    <div class="chat-container">
+        <div class="chat-btn" id="chatToggle">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h3><i class="fas fa-robot"></i> دستیار هوشمند</h3>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span>آنلاین</span>
+                </div>
+                <button class="close-btn" id="closeChat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="chat-body" id="chatBody">
+                <div class="a01">
+                    <a class="a11"
+                        href="file:///C:/Users/apc/Desktop/%D8%AF%D9%88%D8%B1%D9%87%20%D8%A7%D9%85%D9%88%D8%B2%D8%B4%DB%8C%20%D8%B4%D8%B1%D9%88%D8%B9%20%DA%A9%D8%AF%20%D9%86%D9%88%DB%8C%D8%B3%DB%8C%20%D8%A7%D8%B2%20%D8%B5%D9%81%D8%B1/%DA%86%D8%AA%20%D8%A8%D8%A7%D8%AA%20%D9%87%D8%A7%DB%8C%20%D8%AF%D9%88%D8%B1%D9%87%20%D8%A7%D9%85%D9%88%D8%B2%D8%B4%DB%8C%20%D8%B4%D8%B1%D9%88%D8%B9%20%DA%A9%D8%AF%20%D9%86%D9%88%DB%8C%D8%B3%DB%8C%20%D8%A7%D8%B2%20%D8%B5%D9%81%D8%B1/%DA%86%D8%AA%20%D8%A8%D8%A7%D8%AA%2001%D8%B5%D9%81%D8%AD%D9%87%20%D8%AF%D9%88%D8%B1%D9%87%20%D8%A7%D9%85%D9%88%D8%B2%D8%B4%20%D8%B4%D8%B1%D9%88%D8%B9%20%DA%A9%D8%AF%20%D9%86%D9%88%DB%8C%D8%B3%DB%8C%20%D8%A7%D8%B2%20%D8%B5%D9%81%D8%B1.html">
+                        برای رفتن به صفحه هوشمند اینجا کلیک کنید!
+                    </a>
+
+                </div>
+                <div class="welcome-message">
+                    سلام! من دستیار هوشمند شما هستم. هر سوالی دارید بپرسید، با کمال میل پاسخ می‌دهم.
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-lightbulb"></i> توانایی‌های من</h4>
+                    <p>• پاسخ به هر نوع سوال در هر زمینه‌ای</p>
+                    <p>• تولید پاسخ‌های هوشمندانه و انسانی</p>
+                    <p>• حل مسائل ریاضی، علمی و فنی</p>
+                    <p>• ارائه پیشنهادات و راهکارهای خلاقانه</p>
+                </div>
+                <div class="suggested-questions">
+                    <div class="question-btn" data-question="هوش مصنوعی چیست؟">هوش مصنوعی چیست؟</div>
+                    <div class="question-btn" data-question="آب و هوای تهران چطور است؟">آب و هوای تهران</div>
+                    <div class="question-btn" data-question="بهترین زبان برنامه نویسی کدام است؟">بهترین زبان
+                        برنامه‌نویسی</div>
+                    <div class="question-btn" data-question="نحوه ساخت وبسایت را توضیح بده">ساخت وبسایت</div>
+                </div>
+            </div>
+
+            <div class="chat-footer">
+                <div class="message-input">
+                    <input type="text" id="messageInput" placeholder="پیام خود را بنویسید...">
+                    <button class="send-btn" id="sendMessage">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .a01:hover {
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .a01 {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            border-radius: 15px 5px;
+            transition: 3s;
+        }
+
+        a.a11 {
+            color: aquamarine;
+            text-decoration: none;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatToggle = document.getElementById('chatToggle');
+            const chatWindow = document.getElementById('chatWindow');
+            const closeChat = document.getElementById('closeChat');
+            const chatBody = document.getElementById('chatBody');
+            const messageInput = document.getElementById('messageInput');
+            const sendMessage = document.getElementById('sendMessage');
+            const questionBtns = document.querySelectorAll('.question-btn');
+
+            // متغیرهای حالت چت
+            let isChatOpen = false;
+            const knowledgeBase = {
+                "سلام": ["سلام! چطور می‌تونم کمک کنم؟", "درود! چه سوالی داری؟", "سلام عزیزم! چه کمکی از دستم برمیاد؟"],
+                "حالت چطوره": ["من یک ربات هستم، اما از این که با شما صحبت می‌کنم خوشحالم! شما چطورید؟", "همه چیز خوبه، ممنون! چه کمکی می‌تونم بکنم؟"],
+                "اسمت چیه": ["اسم من «دستیار هوشمند» هست. تو رو هم میشناسم؟", "من دستیار هوشمند شما هستم. اسمم مهم نیست، مهم اینه که بتونم بهت کمک کنم!"],
+                "ممنون": ["خواهش می‌کنم! خوشحالم که تونستم کمک کنم.", "قربونت برم! اگه سوال دیگه‌ای داری بپرس.", "خوشحالم که مفید بودم!"],
+                "خداحافظ": ["خدانگهدار! هر وقت خواستی دوباره سر بزن.", "به امید دیدار مجدد!", "موفق باشی! اگه سوالی داشتی من اینجام."],
+                "هوش مصنوعی چیست؟": ["هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که به ساخت ماشین‌های هوشمند می‌پردازد. این سیستم‌ها توانایی یادگیری، استدلال و حل مسئله دارند و می‌توانند مانند انسان فکر کنند و تصمیم بگیرند."],
+                "بهترین زبان برنامه نویسی کدام است؟": ["بهترین زبان برنامه‌نویسی بستگی به نیاز شما دارد. پایتون برای علم داده و یادگیری ماشین عالیه، جاوااسکریپت برای توسعه وب ضروریه، جاوا برای برنامه‌های سازمانی محبوبه، و سی++ برای سیستم‌های سطح پایین مناسب‌تره."],
+                "نحوه ساخت وبسایت را توضیح بده": ["برای ساخت وبسایت باید: 1. ایده و هدف خود را مشخص کنید 2. طرح اولیه و وایرفریم بسازید 3. دامنه و هاست خریداری کنید 4. طراحی رابط کاربری (فرانت‌اند) با HTML, CSS, JS 5. توسعه بخش سرور (بک‌اند) با زبان‌هایی مثل PHP, Python, Node.js 6. تست و راه‌اندازی سایت"],
+                "آب و هوای تهران چطور است؟": ["تهران دارای آب و هوای نیمه خشک است. تابستان‌ها گرم و خشک و زمستان‌ها سرد است. میانگین دمای تهران در تابستان حدود ۳۵ درجه و در زمستان حدود ۵ درجه سانتیگراد است. بهترین زمان بازدید از تهران بهار و پاییز است."],
+                "کمک میخوای": ["بله، حتما! من اینجا هستم تا به هر سوالی که داری پاسخ بدم. فقط کافیه سوالت رو بپرسی.", "مطمئنا! هر نوع سوالی در هر زمینه‌ای داری بپرس، من با کمال میل پاسخ می‌دم."],
+                "چه کارهایی میتونی انجام بدی": ["من می‌تونم به سوالات مختلف در زمینه‌های علمی، فنی، تاریخی، فرهنگی و عمومی پاسخ بدم، مسائل ریاضی حل کنم، در مورد رویدادهای روز اطلاعات بدم، برنامه‌های سفر پیشنهاد بدم و خلاصه هر چیزی که نیاز داری!"],
+                "معرفی کتاب": ["اگر به رمان علاقه داری «شازده کوچولو» از اگزوپری یا «1984» از جورج اورول رو پیشنهاد می‌کنم. برای توسعه فردی «اثر مرکب» از دارن هاردی یا «قدرت عادت» از چارلز داهیگ عالین. برای فناوری «هوش مصنوعی: رویکردی مدرن» کتابی جامع‌ست."],
+                "نحوه یادگیری برنامه نویسی": ["برای یادگیری برنامه‌نویسی: 1. یک زبان ساده مثل پایتون شروع کن 2. مفاهیم پایه را یاد بگیر 3. پروژه‌های کوچک انجام بده 4. در چالش‌های کدنویسی شرکت کن 5. از منابع آنلاین مثل freeCodeCamp استفاده کن 6. مستندسازی رو فراموش نکن 7. همیشه تمرین کن!"]
+            };
+
+            // باز و بسته کردن پنجره چت
+            chatToggle.addEventListener('click', () => {
+                isChatOpen = !isChatOpen;
+                chatWindow.classList.toggle('active', isChatOpen);
+                if (isChatOpen) {
+                    messageInput.focus();
+                }
+            });
+
+            closeChat.addEventListener('click', () => {
+                isChatOpen = false;
+                chatWindow.classList.remove('active');
+            });
+
+            // ارسال پیام
+            function sendUserMessage() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    // نمایش پیام کاربر
+                    displayMessage(message, 'user');
+                    messageInput.value = '';
+
+                    // شبیه‌سازی تایپ ربات
+                    showTypingIndicator();
+
+                    // تولید پاسخ هوشمند پس از تاخیر
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        const response = generateSmartResponse(message);
+                        displayMessage(response, 'bot');
+
+                        // افزودن سوالات پیشنهادی پس از پاسخ
+                        if (document.querySelectorAll('.message').length % 3 === 0) {
+                            addSuggestedQuestions();
+                        }
+                    }, 1000 + Math.random() * 1000);
+                }
+            }
+
+            // نمایش پیام در چت
+            function displayMessage(text, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.classList.add(sender + '-message');
+                messageElement.textContent = text;
+                chatBody.appendChild(messageElement);
+
+                // اسکرول به پایین
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            // نمایش نشانگر تایپ
+            function showTypingIndicator() {
+                const typingElement = document.createElement('div');
+                typingElement.classList.add('typing-indicator');
+                typingElement.id = 'typingIndicator';
+                typingElement.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatBody.appendChild(typingElement);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            // حذف نشانگر تایپ
+            function removeTypingIndicator() {
+                const typingElement = document.getElementById('typingIndicator');
+                if (typingElement) {
+                    typingElement.remove();
+                }
+            }
+
+            // تولید پاسخ هوشمند
+            function generateSmartResponse(userMessage) {
+                const lowerMessage = userMessage.toLowerCase();
+
+                // جستجوی پاسخ در پایگاه دانش
+                for (const [key, responses] of Object.entries(knowledgeBase)) {
+                    if (lowerMessage.includes(key.toLowerCase())) {
+                        return responses[Math.floor(Math.random() * responses.length)];
+                    }
+                }
+
+                // پاسخ به سوالات خاص
+                if (lowerMessage.includes('ساعت')) {
+                    const now = new Date();
+                    return `ساعت الان ${now.getHours()} و ${now.getMinutes()} دقیقه است.`;
+                }
+
+                if (lowerMessage.includes('تاریخ')) {
+                    const now = new Date();
+                    return `امروز ${now.toLocaleDateString('fa-IR')} است.`;
+                }
+
+                if (lowerMessage.includes('اسم') || lowerMessage.includes('نام')) {
+                    return 'اسم من "دستیار هوشمند" است. شما چه اسمی دارید؟';
+                }
+
+                //if (lowerMessage.includes('اسم') || lowerMessage.includes('نام')) {
+                //const mnkj = userMessage.mnkj(/(\d+)\s*([علی,محمد])\s*(\d+)/);
+                //const nameis = parseInt(mnkj);
+                //return `${nameis}بسیار هم عالی جناب`;
+                //}
+
+
+                if (lowerMessage.includes('محاسبه') || lowerMessage.includes('حساب')) {
+                    const match = userMessage.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
+                    if (match) {
+                        const num1 = parseInt(match[1]);
+                        const operator = match[2];
+                        const num2 = parseInt(match[3]);
+                        let result;
+
+                        switch (operator) {
+                            case '+': result = num1 + num2; break;
+                            case '-': result = num1 - num2; break;
+                            case '*': result = num1 * num2; break;
+                            case '/': result = num1 / num2; break;
+                            default: result = 'عملیات نامعتبر';
+                        }
+
+                        return `نتیجه محاسبه ${num1} ${operator} ${num2} = ${result} است.`;
+                    }
+                }
+
+                // پاسخ‌های خلاقانه برای سوالات ناشناخته
+                const creativeResponses = [
+                    'سوال جالبی پرسیدی! می‌تونی کمی بیشتر توضیح بدی تا بهتر بتونم کمک کنم؟',
+                    'منظورت رو کامل متوجه نشدم، لطفاً دوباره و با جزئیات بیشتر بپرس.',
+                    'در حال حاضر اطلاعات کافی در این زمینه ندارم، اما سعی می‌کنم در آینده پاسخ بهتری ارائه بدم.',
+                    'جواب این سوال رو دقیقاً نمی‌دونم، اما می‌تونم منابعی رو معرفی کنم که بتونی تحقیق کنی.',
+                    'ایده جالبیه! من هم همین نظر رو دارم، ولی بهتره با یک متخصص هم مشورت کنی.',
+                    'برای پاسخ به این سوال نیاز به اطلاعات بیشتری دارم. لطفاً جزئیات بیشتری ارائه بدید.',
+                    'سوال شما بسیار تخصصی است. پیشنهاد می‌کنم از منابع علمی معتبر استفاده کنید.'
+                ];
+
+                return creativeResponses[Math.floor(Math.random() * creativeResponses.length)];
+            }
+
+            // افزودن سوالات پیشنهادی
+            function addSuggestedQuestions() {
+                const questions = [
+                    "تفاوت هوش مصنوعی و یادگیری ماشین چیست؟",
+                    "چگونه برنامه نویس شوم؟",
+                    "بهترین روش یادگیری زبان انگلیسی چیست؟",
+                    "نحوه ساخت رزومه حرفه‌ای",
+                    "بهترین کشور برای تحصیل کدام است؟",
+                    "نحوه سرمایه گذاری در بورس"
+                ];
+
+                const container = document.createElement('div');
+                container.classList.add('suggested-questions');
+                container.style.marginTop = '15px';
+
+                questions.forEach(q => {
+                    const btn = document.createElement('div');
+                    btn.classList.add('question-btn');
+                    btn.textContent = q;
+                    btn.dataset.question = q;
+                    btn.addEventListener('click', () => {
+                        messageInput.value = q;
+                        sendUserMessage();
+                    });
+                    container.appendChild(btn);
+                });
+
+                chatBody.appendChild(container);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            // رویدادهای ارسال پیام
+            sendMessage.addEventListener('click', sendUserMessage);
+
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendUserMessage();
+                }
+            });
+
+            // نمایش پیام خوش‌آمدگویی اولیه
+            setTimeout(() => {
+                displayMessage('سلام! من یک دستیار هوشمند هستم که به سوالات شما پاسخ می‌دهم. هر سوالی دارید بپرسید!', 'bot');
+            }, 1000);
+
+            // افزودن رویداد به دکمه‌های سوال پیشنهادی
+            questionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const question = btn.dataset.question;
+                    messageInput.value = question;
+                    sendUserMessage();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
